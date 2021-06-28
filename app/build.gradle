@@ -126,4 +126,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit-ktx:$androidx_test_ext_junit_version"
     androidTestImplementation "androidx.test:rules:$androidx_test_rules_version"
     androidTestImplementation "androidx.test:runner:$androidx_test_runner_version"
+    androidTestImplementation "com.kaspersky.android-components:kaspresso:$kaspressoVersion"
 }
