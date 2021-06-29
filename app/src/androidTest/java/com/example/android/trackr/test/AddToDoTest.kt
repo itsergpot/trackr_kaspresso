@@ -1,16 +1,15 @@
 package com.example.android.trackr.test
 
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.android.trackr.MainActivity
 import com.example.android.trackr.screenobject.AddToDoTaskScreen
 import com.example.android.trackr.screenobject.ToDoListScreen
-import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.kakao.spinner.KSpinnerItem
 import org.junit.Rule
 import org.junit.Test
 
-class AddToDoTest: TestCase() {
+class AddToDoTest : TestCaseTimer() {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
@@ -86,11 +85,70 @@ class AddToDoTest: TestCase() {
                         todoOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(2) {
                             isDisplayed()
                             hasText("Peaceful Puffin")
+                            click()
+                        }
+                    }
+                }
+
+                step("Change due date") {
+                    AddToDoTaskScreen {
+
+                        todoDueDate {
+                            click()
+                        }
+
+                        todoYearChange {
+                            click()
+                        }
+
+                        calendarYearSelectorRecyclerView {
+                            isDisplayed()
+                            childWith<AddToDoTaskScreen.CalendarYearItem> { withText("2023") } perform {
+                                click()
+                            }
+                        }
+
+                        todoMonthChangeNext {
+                            click()
+                        }
+
+                        calendarDayCalendarListView {
+                            isDisplayed()
+                            childWith<AddToDoTaskScreen.DayListItem> { withText("5") } perform {
+                                click()
+                            }
                         }
                     }
 
                 }
             }
+
+        }
+
+    }
+
+
+    @Test
+    fun test() {
+
+        ToDoListScreen {
+            addToDoButton {
+                click()
+            }
+        }
+
+        AddToDoTaskScreen {
+
+            todoDueDate {
+                click()
+            }
+
+            calendarDayCalendarListView.childAt<AddToDoTaskScreen.DayListItem>(4) {
+                isDisplayed()
+                hasText("5")
+                click()
+            }
+
 
         }
     }
