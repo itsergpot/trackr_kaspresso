@@ -1,9 +1,9 @@
 package com.example.android.trackr.screenobject
 
-import android.service.autofill.FieldClassification
 import android.view.View
 import androidx.test.espresso.DataInteraction
 import com.example.android.trackr.R
+import com.example.android.trackr.screenobject.soutils.withHintCustomMatcher
 import io.github.kakaocup.kakao.chipgroup.KChipGroup
 import io.github.kakaocup.kakao.edit.KEditText
 import io.github.kakaocup.kakao.list.KAbsListView
@@ -67,18 +67,34 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
     val todoMonthChangePrevious = KButton { withId(R.id.month_navigation_previous) }
     val todoMonthChangeNext = KButton { withId(R.id.month_navigation_next) }
 
-    //Calendar day changer
-    val calendarDayCalendarListView = KAbsListView(
-        builder = { withId(R.id.month_grid) },
-        itemTypeBuilder = {
-            itemType(::DayListItem)
-        }
-    )
+    //Calendar date changer
+    val todoCalendarDateChangerButton = KButton { withId(R.id.mtrl_picker_header_toggle) }
+    val todoCalendarDateInput = KEditText { withMatcher(withHintCustomMatcher("Date")) }
 
-    class DayListItem(parent: DataInteraction) : KAdapterItem<DayListItem>(parent),
-        TextViewAssertions
+
+
+    //Calendar Ok, Cancel buttons
+    val todoCalendarOkButton = KButton { withId(R.id.confirm_button) }
+    val todoCalendarCancelButton = KButton { withId(R.id.cancel_button) }
 
     //Tags
     val todoTags = KTextView { withId(R.id.tag_container) }
-    val todoTagsChipGroup = KChipGroup { withId(R.id.tags) }
+
+    //Tags RecyclerListView
+
+    val tag = KTextView { withId(android.R.id.text1) }
+
+    val todoTagsListView = KRecyclerView(
+        builder = {
+            withId(R.id.select_dialog_listview)
+        },
+        itemTypeBuilder = {
+            itemType(::TagsListItem)
+        }
+    )
+
+    class TagsListItem(parent: Matcher<View>) : KRecyclerItem<TagsListItem>(parent),
+        TextViewAssertions {
+            val tagTitle = KTextView(parent) { withId(android.R.id.text1) }
+        }
 }

@@ -1,10 +1,11 @@
 package com.example.android.trackr.test
 
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.android.trackr.MainActivity
 import com.example.android.trackr.screenobject.AddToDoTaskScreen
 import com.example.android.trackr.screenobject.ToDoListScreen
+import com.example.android.trackr.screenobject.soutils.withTextCustomMatcher
+import io.github.kakaocup.kakao.screen.Screen.Companion.idle
 import io.github.kakaocup.kakao.spinner.KSpinnerItem
 import org.junit.Rule
 import org.junit.Test
@@ -97,29 +98,29 @@ class AddToDoTest : TestCaseTimer() {
                             click()
                         }
 
-                        todoYearChange {
+                        todoCalendarDateChangerButton {
                             click()
                         }
 
-                        calendarYearSelectorRecyclerView {
-                            isDisplayed()
-                            childWith<AddToDoTaskScreen.CalendarYearItem> { withText("2023") } perform {
-                                click()
-                            }
+                        todoCalendarDateInput {
+                            replaceText("07/22/2021")
                         }
 
-                        todoMonthChangeNext {
+                        todoCalendarOkButton {
                             click()
-                        }
-
-                        calendarDayCalendarListView {
-                            isDisplayed()
-                            childWith<AddToDoTaskScreen.DayListItem> { withText("5") } perform {
-                                click()
-                            }
                         }
                     }
+                }
 
+                step("Add tags") {
+                    AddToDoTaskScreen {
+
+                        todoTags {
+                            click()
+                        }
+
+
+                    }
                 }
             }
 
@@ -139,16 +140,33 @@ class AddToDoTest : TestCaseTimer() {
 
         AddToDoTaskScreen {
 
-            todoDueDate {
+            todoTags {
                 click()
             }
 
-            calendarDayCalendarListView.childAt<AddToDoTaskScreen.DayListItem>(4) {
+            tag {
+               withTextCustomMatcher("2.3 release")
+               click()
+            }
+
+            idle(10000)
+
+/*            todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
+                tagTitle {
+                    isDisplayed()
+                    hasText("2.3 release")
+                }
+            }*/
+
+/*            todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
                 isDisplayed()
-                hasText("5")
-                click()
+                hasText("2.4 release")
             }
 
+            todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(2) {
+                isDisplayed()
+                hasText("a11y")
+            }*/
 
         }
     }
