@@ -3,9 +3,9 @@ package com.example.android.trackr.screenobject
 import android.view.View
 import androidx.test.espresso.DataInteraction
 import com.example.android.trackr.R
-import com.example.android.trackr.screenobject.soutils.withHintCustomMatcher
 import io.github.kakaocup.kakao.chipgroup.KChipGroup
 import io.github.kakaocup.kakao.edit.KEditText
+import io.github.kakaocup.kakao.edit.KTextInputLayout
 import io.github.kakaocup.kakao.list.KAbsListView
 import io.github.kakaocup.kakao.list.KAdapterItem
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
@@ -69,9 +69,7 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
 
     //Calendar date changer
     val todoCalendarDateChangerButton = KButton { withId(R.id.mtrl_picker_header_toggle) }
-    val todoCalendarDateInput = KEditText { withMatcher(withHintCustomMatcher("Date")) }
-
-
+    val todoCalendarDateInput = KTextInputLayout { withId(R.id.mtrl_picker_text_input_date) }
 
     //Calendar Ok, Cancel buttons
     val todoCalendarOkButton = KButton { withId(R.id.confirm_button) }
@@ -82,9 +80,7 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
 
     //Tags RecyclerListView
 
-    val tag = KTextView { withId(android.R.id.text1) }
-
-    val todoTagsListView = KRecyclerView(
+    val todoTagsListView = KAbsListView(
         builder = {
             withId(R.id.select_dialog_listview)
         },
@@ -93,8 +89,8 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
         }
     )
 
-    class TagsListItem(parent: Matcher<View>) : KRecyclerItem<TagsListItem>(parent),
-        TextViewAssertions {
-            val tagTitle = KTextView(parent) { withId(android.R.id.text1) }
-        }
+    class TagsListItem(parent: DataInteraction) : KAdapterItem<TagsListItem>(parent),
+        TextViewAssertions
+
+    val todoSaveButton = KButton { withId(R.id.action_save) }
 }

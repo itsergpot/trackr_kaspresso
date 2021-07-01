@@ -4,7 +4,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.android.trackr.MainActivity
 import com.example.android.trackr.screenobject.AddToDoTaskScreen
 import com.example.android.trackr.screenobject.ToDoListScreen
-import com.example.android.trackr.screenobject.soutils.withTextCustomMatcher
 import io.github.kakaocup.kakao.screen.Screen.Companion.idle
 import io.github.kakaocup.kakao.spinner.KSpinnerItem
 import org.junit.Rule
@@ -103,7 +102,9 @@ class AddToDoTest : TestCaseTimer() {
                         }
 
                         todoCalendarDateInput {
-                            replaceText("07/22/2021")
+                            edit {
+                                replaceText("07/22/2021")
+                            }
                         }
 
                         todoCalendarOkButton {
@@ -119,6 +120,30 @@ class AddToDoTest : TestCaseTimer() {
                             click()
                         }
 
+                        todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(0) {
+                            isDisplayed()
+                            hasText("2.3 release")
+                            click()
+                        }
+
+                        todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
+                            isDisplayed()
+                            hasText("2.4 release")
+                            click()
+                        }
+
+                        todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(2) {
+                            isDisplayed()
+                            hasText("a11y")
+                            click()
+                        }
+
+                        pressBack()
+
+                        todoSaveButton {
+                            isDisplayed()
+                            click()
+                        }
 
                     }
                 }
@@ -132,42 +157,5 @@ class AddToDoTest : TestCaseTimer() {
     @Test
     fun test() {
 
-        ToDoListScreen {
-            addToDoButton {
-                click()
-            }
-        }
-
-        AddToDoTaskScreen {
-
-            todoTags {
-                click()
-            }
-
-            tag {
-               withTextCustomMatcher("2.3 release")
-               click()
-            }
-
-            idle(10000)
-
-/*            todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
-                tagTitle {
-                    isDisplayed()
-                    hasText("2.3 release")
-                }
-            }*/
-
-/*            todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
-                isDisplayed()
-                hasText("2.4 release")
-            }
-
-            todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(2) {
-                isDisplayed()
-                hasText("a11y")
-            }*/
-
-        }
     }
 }
