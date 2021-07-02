@@ -4,19 +4,19 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.android.trackr.MainActivity
 import com.example.android.trackr.screenobject.AddToDoTaskScreen
 import com.example.android.trackr.screenobject.ToDoListScreen
-import io.github.kakaocup.kakao.screen.Screen.Companion.idle
 import io.github.kakaocup.kakao.spinner.KSpinnerItem
 import org.junit.Rule
 import org.junit.Test
+import com.example.android.trackr.shared.R.drawable.ic_peaceful_puffin
 
 class AddToDoTest : TestCaseTimer() {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
-    //Добавить TODO и проверить что она добавилась
     @Test
     fun checkAddToDo() {
+
         run {
             step("Follow to Adding ToDo screen") {
                 ToDoListScreen {
@@ -28,15 +28,15 @@ class AddToDoTest : TestCaseTimer() {
 
             step("Fill ToDo title, description, select status") {
                 AddToDoTaskScreen {
-                    todoTitle {
+                    todoAddTitle {
                         replaceText("ToDoTitle")
                     }
 
-                    todoDescription {
+                    todoAddDescription {
                         replaceText("ToDoDescription")
                     }
 
-                    todoStatusSpinner {
+                    todoAddStatusSpinner {
                         isVisible()
                         hasSize(4)
 
@@ -64,98 +64,133 @@ class AddToDoTest : TestCaseTimer() {
                         }
                     }
                 }
+            }
 
-                step("Change ToDo`s owner") {
-                    AddToDoTaskScreen {
+            step("Change ToDo`s owner") {
+                AddToDoTaskScreen {
 
-                        todoOwnerChipGroup {
-                            click()
-                        }
-
-                        todoOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(0) {
-                            isDisplayed()
-                            hasText("Daring Dove")
-                        }
-
-                        todoOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(1) {
-                            isDisplayed()
-                            hasText("Likeable Lark")
-                        }
-
-                        todoOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(2) {
-                            isDisplayed()
-                            hasText("Peaceful Puffin")
-                            click()
-                        }
+                    todoAddOwnerChipGroup {
+                        click()
                     }
-                }
 
-                step("Change due date") {
-                    AddToDoTaskScreen {
-
-                        todoDueDate {
-                            click()
-                        }
-
-                        todoCalendarDateChangerButton {
-                            click()
-                        }
-
-                        todoCalendarDateInput {
-                            edit {
-                                replaceText("07/22/2021")
-                            }
-                        }
-
-                        todoCalendarOkButton {
-                            click()
-                        }
+                    todoAddOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(0) {
+                        isDisplayed()
+                        hasText("Daring Dove")
                     }
-                }
 
-                step("Add tags") {
-                    AddToDoTaskScreen {
+                    todoAddOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(1) {
+                        isDisplayed()
+                        hasText("Likeable Lark")
+                    }
 
-                        todoTags {
-                            click()
-                        }
-
-                        todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(0) {
-                            isDisplayed()
-                            hasText("2.3 release")
-                            click()
-                        }
-
-                        todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
-                            isDisplayed()
-                            hasText("2.4 release")
-                            click()
-                        }
-
-                        todoTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(2) {
-                            isDisplayed()
-                            hasText("a11y")
-                            click()
-                        }
-
-                        pressBack()
-
-                        todoSaveButton {
-                            isDisplayed()
-                            click()
-                        }
-
+                    todoAddOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(2) {
+                        isDisplayed()
+                        hasText("Peaceful Puffin")
+                        click()
                     }
                 }
             }
 
+            step("Change due date") {
+                AddToDoTaskScreen {
+
+                    todoAddDueDate {
+                        click()
+                    }
+
+                    todoAddCalendarDateChangerButton {
+                        click()
+                    }
+
+                    todoAddCalendarDateInput {
+                        edit {
+                            replaceText("07/22/2021")
+                        }
+                    }
+
+                    todoAddCalendarOkButton {
+                        click()
+                    }
+                }
+            }
+
+            step("Add tags") {
+                AddToDoTaskScreen {
+
+                    todoAddTags {
+                        click()
+                    }
+
+                    todoAddTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(0) {
+                        isDisplayed()
+                        hasText("2.3 release")
+                        click()
+                    }
+
+                    todoAddTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
+                        isDisplayed()
+                        hasText("2.4 release")
+                        click()
+                    }
+
+                    todoAddTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(2) {
+                        isDisplayed()
+                        hasText("a11y")
+                        click()
+                    }
+
+                    pressBack()
+
+                    todoAddSaveButton {
+                        isDisplayed()
+                        click()
+                    }
+                }
+            }
+
+            step("Check created todo") {
+
+                AddToDoTaskScreen {
+
+                    ToDoListScreen.todoList.childAt<ToDoListScreen.ToDoItem>(0) {
+                        hasDescendant { withText("In progress (3)") }
+                    }
+
+                    ToDoListScreen.todoList.childAt<ToDoListScreen.ToDoItem>(2) {
+                        todoTitle {
+                            isDisplayed()
+                            hasText("ToDoTitle")
+                        }
+
+                        todoStarButton {
+                            isDisplayed()
+                        }
+
+                        todoImageOwnerAvatar {
+                            isDisplayed()
+                            hasDrawable(resId = ic_peaceful_puffin)
+                        }
+
+                        todoOwnerName {
+                            isDisplayed()
+                            hasText("Owner: Peaceful Puffin")
+                        }
+
+                        todoDueDate {
+                            isDisplayed()
+                            hasText("Due Jul 22, 2021")
+                        }
+
+                        todoTagsChipGroup {
+                            hasSize(4)
+                            hasChip("2.3 release")
+                            hasChip("2.4 release")
+                            hasChip("a11y")
+                        }
+                    }
+                }
+            }
         }
-
-    }
-
-
-    @Test
-    fun test() {
-
     }
 }
+

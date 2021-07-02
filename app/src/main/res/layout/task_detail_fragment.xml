@@ -140,7 +140,7 @@
                         android:importantForAccessibility="no"
                         android:text="@string/owner"
                         app:drawableStartCompat="@{viewModel.detail.owner.avatar.drawableResId}"
-                        tools:drawableStartCompat="@drawable/ic_user" />
+                        tools:drawableStartCompat="@drawable/ic_peaceful_puffin" />
 
                     <TextView
                         android:id="@+id/owner"

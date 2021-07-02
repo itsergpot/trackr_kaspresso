@@ -6,6 +6,7 @@ import com.example.android.trackr.R
 import io.github.kakaocup.kakao.chipgroup.KChipGroup
 import io.github.kakaocup.kakao.edit.KEditText
 import io.github.kakaocup.kakao.edit.KTextInputLayout
+import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.list.KAbsListView
 import io.github.kakaocup.kakao.list.KAdapterItem
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
@@ -18,13 +19,20 @@ import io.github.kakaocup.kakao.text.KTextView
 import io.github.kakaocup.kakao.text.TextViewAssertions
 import org.hamcrest.Matcher
 
-object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
+object ToDoEditScreen: Screen<ToDoEditScreen>() {
 
-    val todoAddTitle = KEditText { withId(R.id.title) }
-    val todoAddDescription = KEditText { withId(R.id.description) }
+    val todoEditBackButton = KImageView {
+        isDescendantOfA {
+            withId(R.id.app_bar)
+        }
+        withContentDescription("Back")
+    }
+
+    val todoEditTitle = KEditText { withId(R.id.title) }
+    val todoEditDescription = KEditText { withId(R.id.description) }
 
     //Status spinner
-    val todoAddStatusSpinner = KSpinner(
+    val todoEditStatusSpinner = KSpinner(
         builder = {
             withId(R.id.status)
         },
@@ -34,10 +42,10 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
     )
 
     //Owner
-    val todoAddOwnerChipGroup = KChipGroup { withId(R.id.owner) }
+    val todoEditOwnerChipGroup = KChipGroup { withId(R.id.owner) }
 
     //Owner ListView
-    val todoAddOwnerListView = KAbsListView(
+    val todoEditOwnerListView = KAbsListView(
         builder = {
             withId(R.id.select_dialog_listview)
         },
@@ -50,13 +58,13 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
         TextViewAssertions
 
     //Calendar hood items opener
-    val todoAddDueDate = KTextView { withId(R.id.due_at) }
+    val todoEditDueDate = KTextView { withId(R.id.due_at) }
 
     //Calendar year open button
-    val todoAddYearChange = KButton { withId(R.id.month_navigation_fragment_toggle) }
+    val todoEditYearChange = KButton { withId(R.id.month_navigation_fragment_toggle) }
 
     //Calendar year changer
-    val calendarAddYearSelectorRecyclerView = KRecyclerView(
+    val calendarEditYearSelectorRecyclerView = KRecyclerView(
         builder = { withId(R.id.mtrl_calendar_year_selector_frame) },
         itemTypeBuilder = { itemType(::CalendarYearItem) })
 
@@ -64,23 +72,23 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
         TextViewAssertions
 
     //Calendar month changer
-    val todoAddMonthChangePrevious = KButton { withId(R.id.month_navigation_previous) }
-    val todoAddMonthChangeNext = KButton { withId(R.id.month_navigation_next) }
+    val todoEditMonthChangePrevious = KButton { withId(R.id.month_navigation_previous) }
+    val todoEditMonthChangeNext = KButton { withId(R.id.month_navigation_next) }
 
     //Calendar date changer
-    val todoAddCalendarDateChangerButton = KButton { withId(R.id.mtrl_picker_header_toggle) }
-    val todoAddCalendarDateInput = KTextInputLayout { withId(R.id.mtrl_picker_text_input_date) }
+    val todoEditCalendarDateChangerButton = KButton { withId(R.id.mtrl_picker_header_toggle) }
+    val todoEditCalendarDateInput = KTextInputLayout { withId(R.id.mtrl_picker_text_input_date) }
 
     //Calendar Ok, Cancel buttons
-    val todoAddCalendarOkButton = KButton { withId(R.id.confirm_button) }
-    val todoAddCalendarCancelButton = KButton { withId(R.id.cancel_button) }
+    val todoEditCalendarOkButton = KButton { withId(R.id.confirm_button) }
+    val todoEditCalendarCancelButton = KButton { withId(R.id.cancel_button) }
 
     //Tags
-    val todoAddTags = KTextView { withId(R.id.tag_container) }
+    val todoEditTags = KTextView { withId(R.id.tag_container) }
 
     //Tags RecyclerListView
 
-    val todoAddTagsListView = KAbsListView(
+    val todoEditTagsListView = KAbsListView(
         builder = {
             withId(R.id.select_dialog_listview)
         },
@@ -92,5 +100,6 @@ object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
     class TagsListItem(parent: DataInteraction) : KAdapterItem<TagsListItem>(parent),
         TextViewAssertions
 
-    val todoAddSaveButton = KButton { withId(R.id.action_save) }
+    val todoEditSaveButton = KButton { withId(R.id.action_save) }
+
 }
