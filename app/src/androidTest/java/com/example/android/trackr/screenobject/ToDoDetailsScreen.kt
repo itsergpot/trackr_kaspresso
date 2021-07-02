@@ -1,7 +1,6 @@
 package com.example.android.trackr.screenobject
 
 import com.example.android.trackr.R
-import io.github.kakaocup.kakao.chipgroup.KChipGroup
 import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.screen.Screen
 import io.github.kakaocup.kakao.text.KButton

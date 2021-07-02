@@ -2,7 +2,7 @@ package com.example.android.trackr.test
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.android.trackr.MainActivity
-import com.example.android.trackr.screenobject.AddToDoTaskScreen
+import com.example.android.trackr.screenobject.ToDoAddTaskScreen
 import com.example.android.trackr.screenobject.ToDoListScreen
 import io.github.kakaocup.kakao.spinner.KSpinnerItem
 import org.junit.Rule
@@ -27,7 +27,7 @@ class AddToDoTest : TestCaseTimer() {
             }
 
             step("Fill ToDo title, description, select status") {
-                AddToDoTaskScreen {
+                ToDoAddTaskScreen {
                     todoAddTitle {
                         replaceText("ToDoTitle")
                     }
@@ -67,23 +67,23 @@ class AddToDoTest : TestCaseTimer() {
             }
 
             step("Change ToDo`s owner") {
-                AddToDoTaskScreen {
+                ToDoAddTaskScreen {
 
                     todoAddOwnerChipGroup {
                         click()
                     }
 
-                    todoAddOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(0) {
+                    todoAddOwnerListView.childAt<ToDoAddTaskScreen.OwnerListItem>(0) {
                         isDisplayed()
                         hasText("Daring Dove")
                     }
 
-                    todoAddOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(1) {
+                    todoAddOwnerListView.childAt<ToDoAddTaskScreen.OwnerListItem>(1) {
                         isDisplayed()
                         hasText("Likeable Lark")
                     }
 
-                    todoAddOwnerListView.childAt<AddToDoTaskScreen.OwnerListItem>(2) {
+                    todoAddOwnerListView.childAt<ToDoAddTaskScreen.OwnerListItem>(2) {
                         isDisplayed()
                         hasText("Peaceful Puffin")
                         click()
@@ -92,7 +92,7 @@ class AddToDoTest : TestCaseTimer() {
             }
 
             step("Change due date") {
-                AddToDoTaskScreen {
+                ToDoAddTaskScreen {
 
                     todoAddDueDate {
                         click()
@@ -115,25 +115,25 @@ class AddToDoTest : TestCaseTimer() {
             }
 
             step("Add tags") {
-                AddToDoTaskScreen {
+                ToDoAddTaskScreen {
 
                     todoAddTags {
                         click()
                     }
 
-                    todoAddTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(0) {
+                    todoAddTagsListView.childAt<ToDoAddTaskScreen.TagsListItem>(0) {
                         isDisplayed()
                         hasText("2.3 release")
                         click()
                     }
 
-                    todoAddTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(1) {
+                    todoAddTagsListView.childAt<ToDoAddTaskScreen.TagsListItem>(1) {
                         isDisplayed()
                         hasText("2.4 release")
                         click()
                     }
 
-                    todoAddTagsListView.childAt<AddToDoTaskScreen.TagsListItem>(2) {
+                    todoAddTagsListView.childAt<ToDoAddTaskScreen.TagsListItem>(2) {
                         isDisplayed()
                         hasText("a11y")
                         click()
@@ -150,7 +150,7 @@ class AddToDoTest : TestCaseTimer() {
 
             step("Check created todo") {
 
-                AddToDoTaskScreen {
+                ToDoAddTaskScreen {
 
                     ToDoListScreen.todoList.childAt<ToDoListScreen.ToDoItem>(0) {
                         hasDescendant { withText("In progress (3)") }

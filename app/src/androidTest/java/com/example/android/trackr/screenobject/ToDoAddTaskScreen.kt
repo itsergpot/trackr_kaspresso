@@ -18,7 +18,7 @@ import io.github.kakaocup.kakao.text.KTextView
 import io.github.kakaocup.kakao.text.TextViewAssertions
 import org.hamcrest.Matcher
 
-object AddToDoTaskScreen : Screen<AddToDoTaskScreen>() {
+object ToDoAddTaskScreen : Screen<ToDoAddTaskScreen>() {
 
     val todoAddTitle = KEditText { withId(R.id.title) }
     val todoAddDescription = KEditText { withId(R.id.description) }

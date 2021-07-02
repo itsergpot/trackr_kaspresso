@@ -1,12 +1,9 @@
 package com.example.android.trackr.screenobject
 
 import android.view.View
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.example.android.trackr.R
 import io.github.kakaocup.kakao.chipgroup.KChipGroup
 import io.github.kakaocup.kakao.image.KImageView
-import io.github.kakaocup.kakao.list.KAbsListView
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.screen.Screen

@@ -73,19 +73,23 @@ class ArchiveToDoTest : TestCaseTimer() {
 
         }.run {
 
-            ToDoArchiveListScreen {
-                toolBarArchive {
-                    hasDescendant { withText("Archive") }
-                    isDisplayed()
-                }
+            step("Check if task was added to archive") {
 
-                todoArchiveList {
-                    hasSize(4)
-                }
+                ToDoArchiveListScreen {
+                    toolBarArchive {
+                        hasDescendant { withText("Archive") }
+                        isDisplayed()
+                    }
 
-                todoArchiveList.firstChild<ToDoArchiveListScreen.ToDoItem> {
-                    todoArchiveTitle {
-                        hasText("Support display modes")
+
+                    todoArchiveList {
+                        hasSize(4)
+                    }
+
+                    todoArchiveList.firstChild<ToDoArchiveListScreen.ToDoItem> {
+                        todoArchiveTitle {
+                            hasText("Support display modes")
+                        }
                     }
                 }
             }
