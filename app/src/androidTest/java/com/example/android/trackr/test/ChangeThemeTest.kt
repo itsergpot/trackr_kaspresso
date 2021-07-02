@@ -8,7 +8,7 @@ import com.example.android.trackr.screenobject.ToDoListScreen
 import org.junit.Rule
 import org.junit.Test
 
-class ChangeThemeTest : TestCaseTimer() {
+class ChangeThemeTest: TestCaseTimer() {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)

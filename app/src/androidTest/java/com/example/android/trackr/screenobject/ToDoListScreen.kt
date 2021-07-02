@@ -13,6 +13,8 @@ import org.hamcrest.Matcher
 
 object ToDoListScreen : Screen<ToDoListScreen>() {
 
+
+
     val addToDoButton = KButton { withId(R.id.add) }
 
     val todoList: KRecyclerView = KRecyclerView({
@@ -28,6 +30,7 @@ object ToDoListScreen : Screen<ToDoListScreen>() {
         val todoOwnerName = KTextView(parent) { withId(R.id.owner) }
         val todoDueDate = KTextView(parent) { withId(R.id.due_date) }
         val todoTagsChipGroup = KChipGroup(parent) { withId(R.id.chip_group) }
+        val todoCollapseButton = KImageView(parent) { withId(R.id.expand) }
     }
 
     //Bottom 3DotsMenu
