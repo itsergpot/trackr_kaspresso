@@ -3,17 +3,17 @@ package com.example.android.trackr.screenobject
 import android.view.View
 import com.example.android.trackr.R
 import io.github.kakaocup.kakao.chipgroup.KChipGroup
+import io.github.kakaocup.kakao.common.views.KSwipeView
 import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.screen.Screen
 import io.github.kakaocup.kakao.text.KButton
 import io.github.kakaocup.kakao.text.KTextView
+import io.github.kakaocup.kakao.text.TextViewAssertions
 import org.hamcrest.Matcher
 
 object ToDoListScreen : Screen<ToDoListScreen>() {
-
-
 
     val addToDoButton = KButton { withId(R.id.add) }
 
@@ -23,7 +23,7 @@ object ToDoListScreen : Screen<ToDoListScreen>() {
         itemType(::ToDoItem)
     })
 
-    class ToDoItem(parent: Matcher<View>) : KRecyclerItem<ToDoItem>(parent) {
+    class ToDoItem(parent: Matcher<View>) : KRecyclerItem<ToDoItem>(parent), TextViewAssertions {
         val todoTitle = KTextView(parent) { withId(R.id.title) }
         val todoStarButton = KButton(parent) { withId(R.id.star) }
         val todoImageOwnerAvatar = KImageView(parent) { withId(R.id.owner_avatar) }
@@ -31,6 +31,15 @@ object ToDoListScreen : Screen<ToDoListScreen>() {
         val todoDueDate = KTextView(parent) { withId(R.id.due_date) }
         val todoTagsChipGroup = KChipGroup(parent) { withId(R.id.chip_group) }
         val todoCollapseButton = KImageView(parent) { withId(R.id.expand) }
+
+        //To Do swipe action
+        val todoSwipe = KSwipeView { withMatcher(parent) }
+    }
+
+    //Snack Bar
+    val snackBarUndoButton = KTextView {
+        withId(R.id.snackbar_action)
+        withText("Undo")
     }
 
     //Bottom 3DotsMenu
