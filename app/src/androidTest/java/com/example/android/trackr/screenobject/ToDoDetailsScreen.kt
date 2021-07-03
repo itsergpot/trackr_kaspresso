@@ -25,4 +25,13 @@ object ToDoDetailsScreen: Screen<ToDoDetailsScreen>() {
     val todoCreator = KTextView { withId(R.id.creator) }
     val todoDueDate = KTextView { withId(R.id.due_date) }
 
+    //TODO Scratch
+    // The screen does not have a resource to explicitly compute the Description attribute
+    val todoDescription = KTextView {
+        isDescendantOfA { withId(R.id.scrolling_content) }
+        isDescendantOfA { withId(R.id.content) }
+        isDisplayed()
+        withText("Once upon a time")
+    }
+
 }

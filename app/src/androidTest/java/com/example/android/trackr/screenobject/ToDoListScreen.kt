@@ -31,6 +31,11 @@ object ToDoListScreen : Screen<ToDoListScreen>() {
         val todoDueDate = KTextView(parent) { withId(R.id.due_date) }
         val todoTagsChipGroup = KChipGroup(parent) { withId(R.id.chip_group) }
         val todoCollapseButton = KImageView(parent) { withId(R.id.expand) }
+        val todoStatusCategory = KTextView(parent) {
+            isDescendantOfA { withId(R.id.tasks_list) }
+            isDescendantOfA { withId(R.id.header_content) }
+            withId(-1)
+        }
 
         //To Do swipe action
         val todoSwipe = KSwipeView { withMatcher(parent) }
